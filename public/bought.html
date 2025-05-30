@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pembayaran Tiket</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../src/bought_pay.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="main-header">
+    <div class="logo">WEB</div>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tiket.html">Tiket</a></li>
+        <li><a href="login.html">Login | Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="payment-container">
+    <div class="payment-section">
+      <h3>Pesanan Anda</h3>
+      <div id="orderSummary">
+        </div>
+      <div class="info-row">
+        <span>Biaya Aplikasi</span>
+        <span id="applicationFee">Rp 4.329</span>
+      </div>
+      <div class="total-row">
+        <span>Grand Total</span>
+        <span id="grandTotal">Rp 0</span>
+      </div>
+
+      <button class="action-btn" onclick="location.href='qr_tiket.html'">CETAK TIKET</button>
+    </div>
+  </div>
+
+  <footer class="main-footer">
+    Customer Care: 0812-XXXX-XXXX &nbsp; | &nbsp; © 2025 YourCompany
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const orderSummaryDiv = document.getElementById('orderSummary');
+      const applicationFeeSpan = document.getElementById('applicationFee');
+      const grandTotalSpan = document.getElementById('grandTotal');
+
+      const applicationFee = 4329;
+
+      const checkoutType = localStorage.getItem('checkoutType');
+      const ticketsToProcessString = localStorage.getItem('ticketsToProcess');
+      let ticketsToProcess = {};
+
+      if (ticketsToProcessString) {
+        try {
+          ticketsToProcess = JSON.parse(ticketsToProcessString);
+        } catch (e) {
+          console.error("Gagal memparsing tiket dari localStorage:", e);
+          ticketsToProcess = {};
+        }
+      }
+
+      let subtotal = 0;
+
+      if (Object.keys(ticketsToProcess).length > 0) {
+        for (const ticketId in ticketsToProcess) {
+          const ticket = ticketsToProcess[ticketId];
+          if (ticket && ticket.name && ticket.price && ticket.quantity) {
+            const itemTotal = ticket.price * ticket.quantity;
+            subtotal += itemTotal;
+
+            const itemRow = document.createElement('div');
+            itemRow.classList.add('info-row');
+            itemRow.innerHTML = `
+              <span>${ticket.name} (${ticket.quantity} tiket)</span>
+              <span>Rp ${itemTotal.toLocaleString('id-ID')}</span>
+            `;
+            orderSummaryDiv.appendChild(itemRow);
+          }
+        }
+      } else {
+        const noTicketMessage = document.createElement('div');
+        noTicketMessage.classList.add('info-row');
+        noTicketMessage.innerHTML = `<span>Tidak ada tiket yang dipilih.</span><span>Rp 0</span>`;
+        orderSummaryDiv.appendChild(noTicketMessage);
+      }
+
+      const subtotalRow = document.createElement('div');
+      subtotalRow.classList.add('info-row');
+      subtotalRow.innerHTML = `
+        <span>Subtotal</span>
+        <span>Rp ${subtotal.toLocaleString('id-ID')}</span>
+      `;
+      orderSummaryDiv.appendChild(subtotalRow);
+
+      const grandTotal = subtotal + applicationFee;
+      grandTotalSpan.textContent = `Rp ${grandTotal.toLocaleString('id-ID')}`;
+
+    });
+  </script>
+</body>
+</html>

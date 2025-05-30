@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pembayaran Tiket</title>
+  <link rel="stylesheet" href="../src/common.css" />
+  <link rel="stylesheet" href="../src/bought_pay.css" />
+</head>
+<body>
+  <header class="main-header">
+    <div class="logo"></div>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tiket.html">Tiket</a></li>
+        <li><a href="login.html">Login | Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="payment-container">
+    <div class="payment-section" id="paymentDetails">
+      <p>Memuat pesanan...</p>
+    </div>
+  </div>
+
+  <footer class="main-footer">
+    Customer Care: 0812-XXXX-XXXX &nbsp; | &nbsp; © 2025 YourCompany
+  </footer>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const data = JSON.parse(localStorage.getItem('selectedThemePark'));
+
+      if (!data) {
+        document.getElementById('paymentDetails').innerHTML = '<p>Tidak ada pesanan ditemukan.</p>';
+        return;
+      }
+
+      const { name, price, quantity } = data;
+      const subtotal = price * quantity;
+      const fee = 4329;
+      const grandTotal = subtotal + fee;
+
+      document.getElementById('paymentDetails').innerHTML = `
+        <h3>Pesanan Anda</h3>
+        <div class="info-row">
+          <span>Tiket Masuk ${name} (${quantity} tiket)</span>
+          <span>Rp ${subtotal.toLocaleString('id-ID')}</span>
+        </div>
+        <div class="info-row">
+          <span>Subtotal</span>
+          <span>Rp ${subtotal.toLocaleString('id-ID')}</span>
+        </div>
+        <div class="info-row">
+          <span>Biaya Aplikasi</span>
+          <span>Rp ${fee.toLocaleString('id-ID')}</span>
+        </div>
+        <div class="total-row">
+          <span>Grand Total</span>
+          <span>Rp ${grandTotal.toLocaleString('id-ID')}</span>
+        </div>
+
+        <div class="agreement-checkbox">
+          <input type="checkbox" id="agree" required>
+          <label for="agree">Saya setuju dengan syarat dan ketentuan</label>
+        </div>
+
+        <button class="action-btn" onclick="bayar()">Bayar Sekarang</button>
+      `;
+    });
+
+    function bayar() {
+      const agree = document.getElementById('agree');
+      if (!agree.checked) {
+        alert("Harap setujui syarat dan ketentuan.");
+        return;
+      }
+      location.href = "konfirmasi.html";
+    }
+  </script>
+</body>
+</html>

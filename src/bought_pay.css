@@ -1,0 +1,133 @@
+    /* Gaya dasar yang mungkin ada di common.css, diatur di sini untuk kemandirian */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #393E41;
+      background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Gaya untuk header utama */
+    .main-header {
+      background-color: #3F88C5;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .main-header .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      background-color: #E94F37;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .main-nav ul {
+      display: flex;
+      list-style: none;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .main-nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    .main-nav ul li a:hover {
+      color: #d1e0f0;
+    }
+
+    /* Gaya untuk kontainer pembayaran */
+    .payment-container {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      flex-grow: 1;
+    }
+
+    .payment-section h3 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #34495e;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px dashed #e0e0e0;
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    .info-row:last-of-type {
+      border-bottom: none;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 0;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #2c3e50;
+      border-top: 2px solid #3F88C5;
+      margin-top: 1rem;
+    }
+
+    .action-btn {
+      display: block;
+      width: 100%;
+      background-color: #27ae60; /* Hijau untuk tombol aksi */
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 2rem;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .action-btn:hover {
+      background-color: #219d57;
+      transform: translateY(-2px);
+    }
+
+    /* Gaya untuk footer */
+    .main-footer {
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 3rem;
+      background-color: #34495e;
+      color: white;
+      font-size: 0.9rem;
+      border-radius: 12px 12px 0 0;
+    }

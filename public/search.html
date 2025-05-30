@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pencarian Tiket</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../src/search.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="main-header">
+    <div class="logo">WEB</div>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tiket.html">Tiket</a></li>
+        <li><a href="login.html">Login | Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="search-container">
+    <h1 class="page-title">Tiket Tersedia</h1>
+    <p class="page-subtitle">Temukan tiket taman hiburan impianmu!</p>
+
+    <div class="filter-controls">
+      <input type="text" id="filter-city" placeholder="Kota" class="focus:outline-none focus:ring-2 focus:ring-blue-400 rounded-md" />
+      <input type="date" id="filter-date" class="focus:outline-none focus:ring-2 focus:ring-blue-400 rounded-md" />
+    </div>
+
+    <div class="ticket-list" id="ticketList"></div>
+
+    <div id="checkoutBox" class="hidden">
+      <button onclick="checkout()">Checkout</button>
+    </div>
+  </div>
+
+  <footer class="main-footer">
+    &copy; 2025 NamaWeb
+  </footer>
+
+  <div id="messageModal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <h2 id="modalTitle"></h2>
+      <p id="modalMessage"></p>
+      <button onclick="hideMessage()">OK</button>
+    </div>
+  </div>
+
+  <script>
+    const availableTickets = [
+      { id: 'dufan', name: 'Dufan', price: 150000, city: 'Jakarta', dates: ['2025-06-01', '2025-06-08', '2025-06-15'] },
+      { id: 'transstudiobdg', name: 'Trans Studio Bandung', price: 180000, city: 'Bandung', dates: ['2025-06-02', '2025-06-09', '2025-06-16'] },
+      { id: 'jatimpark', name: 'Jatim Park', price: 120000, city: 'Malang', dates: ['2025-06-03', '2025-06-10', '2025-06-17'] },
+      { id: 'ancol', name: 'Ancol Dreamland', price: 160000, city: 'Jakarta', dates: ['2025-06-01', '2025-06-07', '2025-06-14'] },
+      { id: 'tamanmini', name: 'Taman Mini Indonesia Indah', price: 100000, city: 'Jakarta', dates: ['2025-06-05', '2025-06-12', '2025-06-19'] }
+    ];
+
+    let selectedTickets = {};
+
+    const ticketListDiv = document.getElementById('ticketList');
+    const filterCityInput = document.getElementById('filter-city');
+    const filterDateInput = document.getElementById('filter-date');
+    const checkoutBox = document.getElementById('checkoutBox');
+    const messageModal = document.getElementById('messageModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMessage = document.getElementById('modalMessage');
+
+    function showMessage(title, message) {
+      modalTitle.textContent = title;
+      modalMessage.textContent = message;
+      messageModal.classList.remove('hidden');
+    }
+
+    function hideMessage() {
+      messageModal.classList.add('hidden');
+    }
+
+    function renderTickets() {
+  ticketListDiv.innerHTML = '';
+
+  const cityFilter = filterCityInput.value.toLowerCase().trim();
+  const dateFilter = filterDateInput.value;
+
+  let found = false;
+
+  availableTickets.forEach(ticket => {
+    const matchesCity = !cityFilter || ticket.city.toLowerCase().includes(cityFilter);
+    const matchesDate = !dateFilter || ticket.dates.includes(dateFilter);
+
+    if (matchesCity && matchesDate) {
+      found = true;
+      const ticketCard = document.createElement('div');
+      ticketCard.classList.add('ticket-card');
+      ticketCard.setAttribute('data-id', ticket.id);
+
+      ticketCard.innerHTML = `
+        <div>
+          <h3>${ticket.name}</h3>
+          <p>Rp ${ticket.price.toLocaleString('id-ID')}</p>
+        </div>
+        <div class="quantity-control"></div>
+      `;
+      ticketListDiv.appendChild(ticketCard);
+
+      const quantityControl = ticketCard.querySelector('.quantity-control');
+      if (selectedTickets[ticket.id] && selectedTickets[ticket.id].quantity > 0) {
+        quantityControl.innerHTML = `
+          <div class="counter-and-checkout">
+            <div class="counter-box">
+              <button onclick="adjustQuantity(this, -1, '${ticket.id}')">-</button>
+              <span>${selectedTickets[ticket.id].quantity}</span>
+              <button onclick="adjustQuantity(this, 1, '${ticket.id}')">+</button>
+            </div>
+            <button class="individual-checkout-btn" onclick="checkoutIndividualTicket('${ticket.id}')">Checkout</button>
+          </div>
+        `;
+      } else {
+        quantityControl.innerHTML = `
+          <button class="select-ticket-btn" onclick="showCounter(this, '${ticket.id}')">Tambah</button>
+        `;
+      }
+    }
+  });
+
+  if (!found) {
+    ticketListDiv.innerHTML = '<p class="text-gray-500 mt-4">Tidak ada tiket yang cocok dengan pencarian Anda.</p>';
+  }
+
+  updateCheckoutBoxVisibility();
+}
+
+    function showCounter(button, ticketId) {
+      const card = button.closest('.ticket-card');
+      const container = card.querySelector('.quantity-control');
+      const ticket = availableTickets.find(t => t.id === ticketId);
+
+      let initialQuantity = selectedTickets[ticket.id] ? selectedTickets[ticket.id].quantity : 1;
+      if (initialQuantity === 0) initialQuantity = 1;
+
+      container.innerHTML = `
+        <div class="counter-and-checkout">
+          <div class="counter-box">
+            <button onclick="adjustQuantity(this, -1, '${ticket.id}')">-</button>
+            <span>${initialQuantity}</span>
+            <button onclick="adjustQuantity(this, 1, '${ticket.id}')">+</button>
+          </div>
+          <button class="individual-checkout-btn" onclick="checkoutIndividualTicket('${ticket.id}')">Checkout</button>
+        </div>
+      `;
+
+      selectedTickets[ticket.id] = {
+        name: ticket.name,
+        price: ticket.price,
+        quantity: initialQuantity
+      };
+      localStorage.setItem('selectedTickets', JSON.stringify(selectedTickets));
+      updateCheckoutBoxVisibility();
+    }
+
+    function adjustQuantity(btn, delta, ticketId) {
+      const span = btn.parentElement.querySelector('span');
+      let currentQuantity = parseInt(span.textContent);
+      currentQuantity += delta;
+
+      const card = btn.closest('.ticket-card');
+      const quantityControl = card.querySelector('.quantity-control');
+      const ticket = availableTickets.find(t => t.id === ticketId);
+
+      if (currentQuantity <= 0) {
+        quantityControl.innerHTML = `<button class="select-ticket-btn" onclick="showCounter(this, '${ticket.id}')">Tambah</button>`;
+        delete selectedTickets[ticket.id];
+      } else {
+        span.textContent = currentQuantity;
+        selectedTickets[ticket.id].quantity = currentQuantity;
+      }
+
+      localStorage.setItem('selectedTickets', JSON.stringify(selectedTickets));
+      updateCheckoutBoxVisibility();
+    }
+
+    function updateCheckoutBoxVisibility() {
+      const hasSelectedTickets = Object.values(selectedTickets).some(ticket => ticket && ticket.quantity > 0);
+      if (hasSelectedTickets) {
+        checkoutBox.classList.remove('hidden');
+      } else {
+        checkoutBox.classList.add('hidden');
+      }
+    }
+
+    function checkout() {
+      const totalSelected = Object.values(selectedTickets).reduce((sum, ticket) => sum + (ticket ? ticket.quantity : 0), 0);
+
+      if (totalSelected === 0) {
+        showMessage("Peringatan", "Pilih tiket terlebih dahulu.");
+        return;
+      }
+      localStorage.setItem('checkoutType', 'multiple');
+      localStorage.setItem('ticketsToProcess', JSON.stringify(selectedTickets));
+      window.location.href = 'bought.html';
+    }
+
+    function checkoutIndividualTicket(ticketId) {
+      const ticket = availableTickets.find(t => t.id === ticketId);
+      if (!ticket || !selectedTickets[ticketId] || selectedTickets[ticketId].quantity === 0) {
+        showMessage("Peringatan", "Pilih tiket terlebih dahulu.");
+        return;
+      }
+      localStorage.setItem('checkoutType', 'single');
+      localStorage.setItem('ticketsToProcess', JSON.stringify({ [ticketId]: selectedTickets[ticketId] }));
+      window.location.href = 'bought.html';
+    }
+
+    function initializePage() {
+      const params = new URLSearchParams(window.location.search);
+      filterCityInput.value = params.get('city') || '';
+      filterDateInput.value = params.get('date') || '';
+
+      const storedTickets = localStorage.getItem('selectedTickets');
+      if (storedTickets) {
+        try {
+          selectedTickets = JSON.parse(storedTickets);
+          selectedTickets = Object.fromEntries(
+            Object.entries(selectedTickets).filter(([, value]) => value !== null && value !== undefined)
+          );
+        } catch (e) {
+          console.error("Gagal memparsing selectedTickets dari localStorage:", e);
+          selectedTickets = {};
+        }
+      }
+
+      renderTickets(); // 👈 Ini memastikan tiket langsung difilter
+
+      filterCityInput.addEventListener('input', renderTickets);
+      filterDateInput.addEventListener('change', renderTickets);
+    }
+
+    document.addEventListener('DOMContentLoaded', initializePage);
+  </script>
+</body>
+</html>
