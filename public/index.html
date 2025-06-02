@@ -1,94 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NamaWeb - Tiket Online</title>
-    <link rel="stylesheet" href="../src/common.css">
-    <link rel="stylesheet" href="../src/index.css">
-</head>
-<body>
-    <header class="main-header">
-        <div class="logo"></div>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="tiket.html">Tiket</a></li>
-                <li><a href="login.html">Login | Register</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section class="hero-section">
-        <h1>NamaWeb</h1>
-        <p>Temukan dan pesan tiket taman hiburan favoritmu dengan mudah!</p>
-    </section>
-
-    <section class="booking-section">
-        <div class="form-row">
-            <div class="form-group">
-                <label for="city">Kota</label>
-                <select id="city">
-                    <option value="Jakarta">Jakarta</option>
-                    <option value="Bandung">Bandung</option>
-                    <option value="Surabaya">Surabaya</option>
-                    <option value="Yogyakarta">Yogyakarta</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="date">Tanggal</label>
-                <input type="date" id="date">
-            </div>
-        </div>
-
-        <button class="search-button" onclick="goToSearch()">Cari Tiket!</button>
-
-        <p class="notice-text">Mohon untuk cek kembali waktu dan tanggal booking</p>
-    </section>
-
-    <section class="content-blocks-section">
-        <div class="image-text-block">
-            <div class="image" style="background-image: url('https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
-            <div class="text">
-                <h2>Welcome to NamaThemePark</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.</p>
-            </div>
-        </div>
-
-        <div class="image-text-block reverse">
-            <div class="image" style="background-image: url('https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
-            <div class="text">
-                <h2>Our Attractions</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.</p>
-            </div>
-        </div>
-
-        <div class="image-text-block">
-            <div class="image" style="background-image: url('https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
-            <div class="text">
-                <h2>Plan Your Visit</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.</p>
-            </div>
-        </div>
-    </section>
-
-    <footer class="main-footer">
-        &copy; 2025 NamaWeb
-    </footer>
-
-    <script>
-      function goToSearch() {
-        const city = document.getElementById('city').value;
-        const date = document.getElementById('date').value;
-
-        if (!city || !date) {
-          alert('Mohon pilih kota dan tanggal!');
-          return;
-        }
-
-        const params = new URLSearchParams({ city, date });
-        window.location.href = `search.html?${params.toString()}`;
-      }
-    </script>
-</body>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Theme Park Tickets</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div> <!-- ✅ React mounts here -->
+  </body>
 </html>
