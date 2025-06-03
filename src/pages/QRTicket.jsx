@@ -15,7 +15,7 @@ export default function QRTicket() {
           Tunjukkan QR code ini saat di pintu masuk.
         </p>
 
-        <Link to="/ticket" className="btn-action-primary mt-6">
+        <Link to="/tiket" className="btn-action-primary mt-6">
           Lihat Semua Tiket
         </Link>
       </main>

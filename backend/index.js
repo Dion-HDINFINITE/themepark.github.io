@@ -7,7 +7,7 @@ const PORT = 3001;
 
 app.use(cors());
 app.use(express.json());
-app.use('/', authRoutes);
+app.use('/auth', authRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);

@@ -1,4 +1,3 @@
-    /* Gaya dasar yang mungkin ada di common.css, diatur di sini untuk kemandirian */
     * {
       margin: 0;
       padding: 0;
@@ -14,7 +13,6 @@
       flex-direction: column;
     }
 
-    /* Gaya untuk header utama */
     .main-header {
       background-color: #3F88C5;
       padding: 1rem 2rem;
@@ -58,7 +56,6 @@
       color: #d1e0f0;
     }
 
-    /* Gaya untuk kontainer pembayaran */
     .payment-container {
       max-width: 600px;
       margin: 2rem auto;
@@ -104,7 +101,7 @@
     .action-btn {
       display: block;
       width: 100%;
-      background-color: #27ae60; /* Hijau untuk tombol aksi */
+      background-color: #27ae60;
       color: white;
       border: none;
       padding: 1rem;
@@ -121,7 +118,6 @@
       transform: translateY(-2px);
     }
 
-    /* Gaya untuk footer */
     .main-footer {
       text-align: center;
       padding: 1.5rem;

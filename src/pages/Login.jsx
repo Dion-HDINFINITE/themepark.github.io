@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import '../styles/common.css';
 import '../styles/auth.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';  // <-- import useAuth
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth();  // <-- get login function from context
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,10 +29,13 @@ export default function Login() {
         return;
       }
 
-      // Success
+      // Success: store user in context (which also stores in localStorage)
+      login(data);
+
       alert(`Login berhasil! Selamat datang, ${data.username}`);
-      // Optionally store user info in localStorage or context
-      navigate('/'); // Redirect to home or dashboard
+
+      // Redirect to home page or dashboard
+      navigate('/');
     } catch (err) {
       setError('Terjadi kesalahan. Coba lagi nanti.');
     }

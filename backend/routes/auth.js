@@ -24,29 +24,6 @@ router.post('/register', (req, res) => {
   });
 });
 
-router.post('/register', (req, res) => {
-  const email = req.body.email?.trim();
-  const username = req.body.username?.trim();
-  const password = req.body.password?.trim();
-
-  if (!email || !username || !password) {
-    return res.status(400).json({ error: 'All fields are required' });
-  }
-
-  const insertQuery = `INSERT INTO users (email, username, password) VALUES (?, ?, ?)`;
-
-  db.run(insertQuery, [email, username, password], function(err) {
-    if (err) {
-      if (err.message.includes('UNIQUE constraint')) {
-        return res.status(409).json({ error: 'Email or username already in use' });
-      }
-      return res.status(500).json({ error: 'Database error' });
-    }
-
-    res.status(201).json({ message: 'User registered successfully', userId: this.lastID });
-  });
-});
-
 router.post('/login', (req, res) => {
   const username = req.body.username?.trim();
   const password = req.body.password?.trim();
