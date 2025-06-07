@@ -37,7 +37,7 @@ export default function Bought() {
   }, []);
 
   const handlePayment = () => {
-    navigate('/qrpay'); // ✅ Go to QRPay page
+    navigate('/qrpay');
   };
 
   const grandTotal = subtotal + applicationFee;

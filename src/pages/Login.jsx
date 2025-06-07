@@ -2,21 +2,21 @@ import React, { useState } from 'react';
 import '../styles/common.css';
 import '../styles/auth.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';  // <-- import useAuth
+import { useAuth } from '../context/AuthContext';
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { login } = useAuth();  // <-- get login function from context
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
     try {
-      const response = await fetch('http://localhost:3001/auth/login', {
+      const response = await fetch('http://localhost:3001/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
@@ -29,12 +29,14 @@ export default function Login() {
         return;
       }
 
-      // Success: store user in context (which also stores in localStorage)
+      // Store userId in localStorage (IMPORTANT for ticket system)
+      localStorage.setItem('userId', data.userId);
+
+      // Call auth context login
       login(data);
 
       alert(`Login berhasil! Selamat datang, ${data.username}`);
 
-      // Redirect to home page or dashboard
       navigate('/');
     } catch (err) {
       setError('Terjadi kesalahan. Coba lagi nanti.');
