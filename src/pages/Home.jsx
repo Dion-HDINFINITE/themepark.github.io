@@ -72,15 +72,13 @@ export default function Home() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')"
+                "url('https://images.unsplash.com/photo-1505731110654-99d7f7f8e39c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"
             }}
           ></div>
           <div className="text">
-            <h2>Welcome to NamaThemePark</h2>
+            <h2>Batavia Park</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in
-              dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed
-              auctor neque eu tellus rhoncus ut eleifend nibh porttitor.
+              Batavia Park adalah taman hiburan ikonik di jantung Jakarta. Rasakan petualangan mendebarkan dan pesona budaya Indonesia yang memukau, cocok untuk semua usia.
             </p>
           </div>
         </div>
@@ -90,15 +88,13 @@ export default function Home() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')"
+                "url('https://images.unsplash.com/photo-1715449187015-3f8b18d3587b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"
             }}
           ></div>
           <div className="text">
-            <h2>Our Attractions</h2>
+            <h2>Pacific Park</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in
-              dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed
-              auctor neque eu tellus rhoncus ut eleifend nibh porttitor.
+              Pacific Park adalah taman hiburan terkemuka di Bandung yang menawarkan petualangan tak terlupakan dengan wahana seru dan atraksi unik. Nikmati keseruan untuk seluruh keluarga!
             </p>
           </div>
         </div>
@@ -108,15 +104,13 @@ export default function Home() {
             className="image"
             style={{
               backgroundImage:
-                "url('https://images.unsplash.com/photo-1513889961551-628c1e5e2ee9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')"
+                "url('https://images.unsplash.com/photo-1603707112961-46e6a1ee5ba7?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"
             }}
           ></div>
           <div className="text">
-            <h2>Plan Your Visit</h2>
+            <h2>Suro Park</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in
-              dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed
-              auctor neque eu tellus rhoncus ut eleifend nibh porttitor.
+              Suro Park adalah taman hiburan keluarga favorit di Surabaya. Nikmati beragam wahana seru, area bermain yang aman, dan suasana riang gembira yang kental dengan semangat dan keramahan khas Surabaya, ideal untuk bersantai dan bersenang-senang.
             </p>
           </div>
         </div>

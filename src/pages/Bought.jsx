@@ -50,8 +50,8 @@ export default function Bought() {
         {tickets.length > 0 ? (
           tickets.map((ticket, idx) => (
             <div className="info-row" key={idx}>
-              <span>{ticket.name} ({ticket.quantity} tiket)</span>
-              <span>Rp {ticket.itemTotal.toLocaleString('id-ID')}</span>
+              <span>{ticket.name} ({ticket.quantity} tiket)&nbsp;</span>
+              <span>Rp{ticket.itemTotal.toLocaleString('id-ID')}</span>
             </div>
           ))
         ) : (
@@ -62,16 +62,16 @@ export default function Bought() {
         )}
 
         <div className="info-row">
-          <span>Subtotal</span>
-          <span>Rp {subtotal.toLocaleString('id-ID')}</span>
+          <span>Subtotal&nbsp;</span>
+          <span>Rp{subtotal.toLocaleString('id-ID')}</span>
         </div>
         <div className="info-row">
-          <span>Biaya Aplikasi</span>
-          <span>Rp {applicationFee.toLocaleString('id-ID')}</span>
+          <span>Biaya Aplikasi&nbsp;</span>
+          <span>Rp{applicationFee.toLocaleString('id-ID')}</span>
         </div>
         <div className="total-row">
-          <span>Grand Total</span>
-          <span>Rp {grandTotal.toLocaleString('id-ID')}</span>
+          <span>Grand Total&nbsp;</span>
+          <span>Rp{grandTotal.toLocaleString('id-ID')}</span>
         </div>
 
         <button className="action-btn" onClick={handlePayment}>

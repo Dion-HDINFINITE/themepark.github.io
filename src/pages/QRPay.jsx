@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/common.css';
 import '../styles/qrticket.css';
+const qrImageUrl = "https://i.imgur.com/CYddOTQ.png";
 
 export default function QRPay() {
   const navigate = useNavigate();
@@ -74,8 +75,17 @@ export default function QRPay() {
       <main className="flex-grow qr-container">
         <h2 className="text-xl font-semibold mb-4">Silakan Scan untuk Pembayaran</h2>
 
-        <div className="qr-placeholder">
-          <p>Scan QR ini untuk menyelesaikan pembayaran</p>
+        <div className="p-4 bg-white rounded-lg border border-gray-200">
+           <img 
+            src={qrImageUrl} 
+            alt="QR Code Tiket" 
+            className="w-[220px] h-[220px] object-cover rounded-md"
+            // Tambahkan fallback jika gambar gagal dimuat
+            onError={(e) => {
+              e.target.onerror = null; 
+              e.target.src="https://placehold.co/220x220/e2e8f0/4a5568?text=QR+Error";
+            }}
+           />
         </div>
 
         <p className="mt-4 text-sm text-gray-600">
